@@ -10,11 +10,18 @@
 #define MAX_COMMAND_LINE_LEN 1024
 #define MAX_COMMAND_LINE_ARGS 128
 
-char prompt[] = "> ";
+//const char * cmd_sign = "$";
+// get the current working directory
+char cwd[MAX_COMMAND_LINE_LEN]
+char prompt[] = getcwd() + ">";
 char delimiters[] = " \t\r\n";
 extern char **environ;
 
-
+bool StartsWith (const char *a, const char *b){
+  if(strncmp(a, b, strlen(b)) == 0) 
+    return 1;
+  return 0;
+}
 
 int main() {
     // Stores the string typed into the command line.
@@ -55,11 +62,22 @@ int main() {
         // 
         
 			  // 0. Modify the prompt to print the current working directory
-        
-			  
+        printf("%s", command_line);
+
+        if(StartsWith(command_line, "$")){
+          printf("COMMAND: %s has been entered.", command_line);
+        }
+
 			
         // 1. Tokenize the command line input (split it on whitespace)
+        // char *token = strtok(command_line, delimiters);
 
+        // while(token != NULL){
+        //   printf("%s\n", token);
+
+        //   // not sure why we need this line
+        //   token = strtok(NULL, delimiters);
+        // }
       
         // 2. Implement Built-In Commands
       
